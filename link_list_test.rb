@@ -13,6 +13,10 @@ require_relative 'link_list.rb'
 #These are the states ^^^^^
 #States are stored in instance variables @variable
 
+#All a list needs to know is it's head. Then all the head knows about is
+#it's state and it's link. So each node contains a reference to another node
+#or to nil if it's the last node in the chain
+
 
 
 
@@ -21,6 +25,36 @@ class LinkListTest < Minitest::Test
   def test_node_class_exists
     assert Node
   end
+
+  def test_it_can_create_new_node
+    node1 = Node.new()
+  end
+
+  def test_nodes_have_a_name
+    node1= Node.new("Jeff")
+    assert_equal "Jeff", node1.name
+  end
+
+  def test_nodes_have_a_link_to_another_node
+    node2 = Node.new("Rachel")
+    node1 = Node.new("Jeff", node2)
+    assert_equal node2, node1.next_node
+  end
+
+  def test_iterative_list_exits
+    assert IterativeLinkedList
+  end
+
+  def test_recursive_list_exits
+    assert RecursiveLinkedList
+  end
+
+
+
+
+
+
+
 
 
 
