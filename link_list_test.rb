@@ -17,7 +17,7 @@ require_relative 'link_list.rb'
 #it's state and it's link. So each node contains a reference to another node
 #or to nil if it's the last node in the chain
 
-
+#
 
 
 class LinkListTest < Minitest::Test
@@ -45,11 +45,28 @@ class LinkListTest < Minitest::Test
     assert IterativeLinkedList
   end
 
+  def test_it_can_create_empty_iterative_lists
+    list = IterativeLinkedList.new
+    assert_equal nil, list.head_node
+  end
+
   def test_recursive_list_exits
     assert RecursiveLinkedList
   end
 
+  def test_it_can_create_empty_recursive_lists
+    list = RecursiveLinkedList.new
+    assert_equal nil, list.head_node
+  end
 
+  def test_it_can_add_a_node_to_an_empty_list
+    list = IterativeLinkedList.new
+    node1 = Node.new("Horace")
+    list.add_node(node1)
+    assert_equal node1, list.head_node
+    assert_equal "Horace", list.head_node.name
+    assert_equal nil, list.head_node.next_node
+  end
 
 
 
