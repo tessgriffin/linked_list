@@ -1,50 +1,56 @@
 class Node
 
-  attr_reader :name
-  attr_accessor :next_node
+  attr_accessor :next_node, :name
 
-  def initialize(name="Horace", next_node=nil)
+  def initialize(name="Horace")
     @name = name
     @next_node = next_node
   end
 
-  def add_node(node)
-    @head_node = node
-    @next_node = node
+  def remove_next_node(node)
+    node.next_node = nil
   end
-  
-end
-
-
-
-class IterativeLinkedList < Node
-
-  attr_accessor :head_node
-
-  def initialize(head_node=nil)
-    @head_node = head_node
-  end
-
-#  def add_node(node)
-#    @head_node = node
-#    @next_node = node
-#  end
 
 end
 
 
 
-class RecursiveLinkedList < Node
+class IterativeLinkedList
 
-  attr_accessor :head_node
+  attr_accessor :head
 
-  def initialize(head_node=nil)
-    @head_node = head_node
+  def initialize
+
+    @head = nil
+
+    @tail = nil
+
   end
 
-#  def add_node(node)
-#    @head_node = node
-#  end
+  def add_node_to_bottom(node)
+    if @head.nil?
+
+      @head = node
+      @tail = node
+    else
+      @tail.next_node = node
+      @tail = node
+    end
+  end
+
+end
+
+
+
+class RecursiveLinkedList < IterativeLinkedList
+
+  attr_accessor :head
+
+  def initialize
+    @head = nil
+    @tail = nil
+  end
+
 
 end
 

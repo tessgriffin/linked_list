@@ -39,8 +39,11 @@ class LinkListTest < Minitest::Test
   end
 
   def test_nodes_have_a_link_to_another_node
+    list = RecursiveLinkedList.new
     node2 = Node.new("Rachel")
-    node1 = Node.new("Jeff", node2)
+    node1 = Node.new("Jeff")
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
     assert_equal node2, node1.next_node
   end
 
@@ -50,7 +53,7 @@ class LinkListTest < Minitest::Test
 
   def test_it_can_create_empty_iterative_lists
     list = IterativeLinkedList.new
-    assert_equal nil, list.head_node
+    assert_equal nil, list.head
   end
 
   def test_recursive_list_exits
@@ -59,22 +62,22 @@ class LinkListTest < Minitest::Test
 
   def test_it_can_create_empty_recursive_lists
     list = RecursiveLinkedList.new
-    assert_equal nil, list.head_node
+    assert_equal nil, list.head
   end
 
   def test_it_can_add_a_node_to_an_empty_list
     list = IterativeLinkedList.new
     list2 = RecursiveLinkedList.new
     node1 = Node.new("Horace")
-    list.add_node(node1)
-    list2.add_node(node1)
-    assert_equal node1, list.head_node
-    assert_equal "Horace", list.head_node.name
-    assert_equal nil, list.head_node.next_node
+    list.add_node_to_bottom(node1)
+    list2.add_node_to_bottom(node1)
+    assert_equal node1, list.head
+    assert_equal "Horace", list.head.name
+    assert_equal nil, list.head.next_node
 
-    assert_equal node1, list2.head_node
-    assert_equal "Horace", list2.head_node.name
-    assert_equal nil, list2.head_node.next_node
+    assert_equal node1, list2.head
+    assert_equal "Horace", list2.head.name
+    assert_equal nil, list2.head.next_node
   end
 
 
@@ -85,16 +88,49 @@ class LinkListTest < Minitest::Test
     node2 = Node.new("May")
     node3 = Node.new("Spock")
     node4 = Node.new("Kirk")
-    list.add_node(node1)
-    node1.add_node(node2)
-    assert_equal node2, list.head_node.next_node
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
+    assert_equal node2, list.head.next_node
 
-    list2.add_node(node3)
-    node3.add_node(node4)
-    assert_equal node4, list2.head_node.next_node
-    assert_equal "Kirk", list2.head_node.next_node.name
+ 
+    list2.add_node_to_bottom(node3)
+    list2.add_node_to_bottom(node4)
+    assert_equal node4, list2.head.next_node
+    assert_equal "Kirk", list2.head.next_node.name
+  end
+
+  def test_added_nodes_are_the_last_node
+    list = RecursiveLinkedList.new
+    node = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    list.add_node_to_bottom(node)
+    list.add_node_to_bottom(node2)
+    assert_equal nil, list.head.next_node.next_node
+  end
+
+  def test_it_can_remove_items_from_end_of_list
+    skip
+    list = RecursiveLinkedList.new
+    node = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    list.add_node(node)
+    node.add_node(node2)
+    list.remove_next_node(node)
+    assert_equal nil, node.next_node
+    assert_equal nil , list.head_node.next_node
+    assert_equal "Spock", list.head_node.name
+  end
+
+  def test_it_can_count_number_of_elements_on_list_recursively
+    skip
+    list = RecursiveLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+
 
   end
+
+
 
 
 
