@@ -108,6 +108,46 @@ class LinkListTest < Minitest::Test
     assert_equal nil, list.head.next_node.next_node
   end
 
+  def test_it_can_count_number_of_elements_on_list_iteratively
+    list = IterativeLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    node3 = Node.new("Sulu")
+    node4 = Node.new("Picard")    
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
+    list.add_node_to_bottom(node3)
+    list.add_node_to_bottom(node4)
+    count = list.count_iterative
+    assert_equal 4, count
+  end
+
+  def test_it_can_count_number_of_elements_on_list_recursively
+    list = RecursiveLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    node3 = Node.new("Sulu")
+    node4 = Node.new("Picard")
+    list.add_node_to_bottom(node1)
+    assert_equal 1, list.count_recursive
+    list.add_node_to_bottom(node2)
+    assert_equal 2, list.count_recursive
+    list.add_node_to_bottom(node3)
+    list.add_node_to_bottom(node4)  
+    assert_equal 4, list.count_recursive  
+  end
+
+  def test_it_can_name_last_node_on_list_iteratively
+    skip
+    list = IterativeLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
+    last_node = list.last_node_data
+    assert_equal "Kirk", last_node
+  end
+
   def test_it_can_remove_items_from_end_of_list
     skip
     list = RecursiveLinkedList.new
@@ -116,20 +156,21 @@ class LinkListTest < Minitest::Test
     list.add_node(node)
     node.add_node(node2)
     list.remove_next_node(node)
-    assert_equal nil, node.next_node
     assert_equal nil , list.head_node.next_node
     assert_equal "Spock", list.head_node.name
   end
 
-  def test_it_can_count_number_of_elements_on_list_recursively
+  def test_it_can_pop_last_element_iteratively
     skip
-    list = RecursiveLinkedList.new
+    list = IterativeLinkedList.new
     node1 = Node.new("Spock")
     node2 = Node.new("Kirk")
-
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
+    list.pop_node_at_end_it
+    assert_equal nil, list.head.next_node
 
   end
-
 
 
 
