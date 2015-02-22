@@ -56,27 +56,38 @@ class IterativeLinkedList
     end
   end
 
-  def node_count_iterative
-    return nil if @head.nil?
-    head = @head
-    count = 0
-    until head.nil?
-      #yield head
-      count += 1
-      head = head.next_node
-    end
-    count
-  end
-
   def last_node_data
+    current = @head
+    if current.nil?
+      return nil
+    elsif current.next_node.nil?
+      return @head.name
+    else      
+      while current.next_node != nil
+        current = current.next_node
+        if current.next_node == nil
+          return current.name
+        end
+      end
+    end
 
   end
 
-  def pop_node_at_end_it
-    return nil if @head.nil?
-    head = @head
-    until head.nil?
-      head = head.next_node
+  def pop_iteratively
+    current = @head
+    previous = nil
+    if current.nil?
+      return nil
+    elsif current.next_node.nil?
+      @head = nil
+    else   
+      while current.next_node != nil   
+        previous = current
+        current = current.next_node
+        if current.next_node == nil
+          previous.next_node = nil
+        end
+      end
     end
   end
 
@@ -111,17 +122,22 @@ class RecursiveLinkedList < IterativeLinkedList
     end
   end
 
-  def node_count_recursive()
-    count = 0
-    if @head.nil?
+  def last_node_data_recursive
+    current = @head
+    if current.nil?
       return nil
-    else
-      count += 1
-      head = head.next_node
-      head.node_count_recursive()
+    elsif current.next_node.nil?
+      return @head.name
+    else      
+      current = current.next_node
+      if current.next_node != nil
+      #  last_node_data_recursive
+      else
+        return current.name
+      end
     end
-    count
   end
+
     
 
 end
@@ -135,7 +151,6 @@ list.add_node_to_bottom(node1)
 list.add_node_to_bottom(node2)
 list.add_node_to_bottom(node3)
 
-count = list.count_recursive
 
 
 

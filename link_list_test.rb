@@ -138,37 +138,72 @@ class LinkListTest < Minitest::Test
   end
 
   def test_it_can_name_last_node_on_list_iteratively
-    skip
     list = IterativeLinkedList.new
     node1 = Node.new("Spock")
     node2 = Node.new("Kirk")
+    node3 = Node.new("Sulu")
+    node4 = Node.new("Picard")
     list.add_node_to_bottom(node1)
     list.add_node_to_bottom(node2)
     last_node = list.last_node_data
     assert_equal "Kirk", last_node
+
+    list.add_node_to_bottom(node3)
+    list.add_node_to_bottom(node4)    
+    last_node = list.last_node_data
+    assert_equal "Picard", last_node
   end
 
-  def test_it_can_remove_items_from_end_of_list
+  def test_it_can_name_last_node_on_list_recursively
     skip
     list = RecursiveLinkedList.new
-    node = Node.new("Spock")
+    node1 = Node.new("Spock")
     node2 = Node.new("Kirk")
-    list.add_node(node)
-    node.add_node(node2)
-    list.remove_next_node(node)
-    assert_equal nil , list.head_node.next_node
-    assert_equal "Spock", list.head_node.name
+    node3 = Node.new("Sulu")
+    node4 = Node.new("Picard")
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
+    list.add_node_to_bottom(node3)
+    last_node = list.last_node_data_recursive
+    assert_equal "Sulu", last_node
+  end  
+
+  def test_it_can_pop_last_element_iteratively_one_node_list
+    list = IterativeLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    list.add_node_to_bottom(node1)
+    list.pop_iteratively
+    assert_equal nil, list.head
+
   end
 
-  def test_it_can_pop_last_element_iteratively
-    skip
+  def test_it_can_pop_last_element_it_2_items
     list = IterativeLinkedList.new
     node1 = Node.new("Spock")
     node2 = Node.new("Kirk")
     list.add_node_to_bottom(node1)
     list.add_node_to_bottom(node2)
-    list.pop_node_at_end_it
-    assert_equal nil, list.head.next_node
+    assert_equal 2, list.count_iterative
+
+    list.pop_iteratively
+    assert_equal 1, list.count_iterative
+  end
+
+  def test_it_can_pop_last_element_it_4_items
+    list = IterativeLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    node3 = Node.new("Sulu")
+    node4 = Node.new("Picard")    
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
+    list.add_node_to_bottom(node3)
+    list.add_node_to_bottom(node4)    
+    assert_equal 4, list.count_iterative
+
+    list.pop_iteratively
+    assert_equal 3, list.count_iterative
 
   end
 
