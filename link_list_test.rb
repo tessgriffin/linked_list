@@ -161,7 +161,6 @@ class LinkListTest < Minitest::Test
     list.add_node_to_bottom(node1)
     list.pop_iteratively
     assert_equal nil, list.head
-
   end
 
   def test_it_can_pop_last_element_it_2_items
@@ -227,5 +226,46 @@ class LinkListTest < Minitest::Test
   end 
 
 
+  def test_it_can_pop_last_element_recursive_one_node_list
+    list = RecursiveLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    list.add_node_to_bottom(node1)
+    list.pop_recursive(node1)
+    assert_equal nil, list.head
+  end
+
+  def test_it_can_pop_last_element_recursive_4_items
+    list = RecursiveLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    node3 = Node.new("Sulu")
+    node4 = Node.new("Picard")    
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
+    list.add_node_to_bottom(node3)
+    list.add_node_to_bottom(node4)    
+    assert_equal 4, list.count_recursive
+
+    list.pop_recursive(node1)
+    assert_equal 3, list.count_recursive
+  end
+
+  def test_it_can_access_a_node_by_numeric_position_recursively
+    list = RecursiveLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    node3 = Node.new("Sulu")
+    node4 = Node.new("Picard")    
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
+    list.add_node_to_bottom(node3)
+    list.add_node_to_bottom(node4)  
+
+    assert_equal "Spock", list.find_node_re(0, node1, 0)
+    assert_equal "Kirk", list.find_node_re(0, node1, 1)
+    assert_equal "Sulu", list.find_node_re(0, node1, 2)
+    assert_equal "Picard", list.find_node_re(0, node1, 3)
+  end
 
 end

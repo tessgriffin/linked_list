@@ -156,18 +156,42 @@ class RecursiveLinkedList < IterativeLinkedList
     end
   end
 
-    
+  def pop_recursive(previous=nil, current)
+    #current = @head
+    #previous = nil
+    if current.nil?
+      return nil
+    elsif current.next_node.nil?
+      @head = nil
+    else    
+      previous = current
+      current = current.next_node
+      if current.next_node != nil
+        pop_recursive(previous, current)
+      else
+          previous.next_node = nil
+      end
+    end
+  end
 
+  def find_node_re(counter, current, position)
+    if position == 0
+      return current.name
+    elsif position == 1
+      return current.next_node.name
+    else
+      while current.next_node != nil
+        counter = counter + 1
+        current = current.next_node
+        if counter == position
+          return current.name
+        end
+      end
+    end
+  end  
+    
 end
 
-list = RecursiveLinkedList.new
-node1 = Node.new("Kirk")
-node2 = Node.new("Spock")
-node3 = Node.new("Sulu")
-
-list.add_node_to_bottom(node1)
-list.add_node_to_bottom(node2)
-list.add_node_to_bottom(node3)
 
 
 
