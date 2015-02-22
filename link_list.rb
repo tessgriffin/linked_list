@@ -140,8 +140,8 @@ class RecursiveLinkedList < IterativeLinkedList
     end
   end
 
-  def last_node_data_recursive
-    current = @head
+#anything I want to persist should be an argument of the method
+  def last_node_data_recursive(current)
     if current.nil?
       return nil
     elsif current.next_node.nil?
@@ -149,7 +149,7 @@ class RecursiveLinkedList < IterativeLinkedList
     else      
       current = current.next_node
       if current.next_node != nil
-        last_node_data_recursive
+        last_node_data_recursive(current)
       else
         return current.name
       end

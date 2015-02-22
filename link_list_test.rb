@@ -152,21 +152,7 @@ class LinkListTest < Minitest::Test
     list.add_node_to_bottom(node4)    
     last_node = list.last_node_data
     assert_equal "Picard", last_node
-  end
-
-  def test_it_can_name_last_node_on_list_recursively
-    skip
-    list = RecursiveLinkedList.new
-    node1 = Node.new("Spock")
-    node2 = Node.new("Kirk")
-    node3 = Node.new("Sulu")
-    node4 = Node.new("Picard")
-    list.add_node_to_bottom(node1)
-    list.add_node_to_bottom(node2)
-    list.add_node_to_bottom(node3)
-    last_node = list.last_node_data_recursive
-    assert_equal "Sulu", last_node
-  end  
+  end 
 
   def test_it_can_pop_last_element_iteratively_one_node_list
     list = IterativeLinkedList.new
@@ -221,9 +207,24 @@ class LinkListTest < Minitest::Test
     assert_equal "Kirk", list.find_node(1)
     assert_equal "Sulu", list.find_node(2)
     assert_equal "Picard", list.find_node(3)
-
   end
 
+  def test_it_can_name_last_node_on_list_recursively
+    list = RecursiveLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    node3 = Node.new("Sulu")
+    node4 = Node.new("Picard")
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
+    list.add_node_to_bottom(node3)
+    last_node = list.last_node_data_recursive(node1)
+    assert_equal "Sulu", last_node
+
+    list.add_node_to_bottom(node4)
+    last_node2 = list.last_node_data_recursive(node1)
+    assert_equal "Picard", last_node2
+  end 
 
 
 
