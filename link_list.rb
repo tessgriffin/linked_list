@@ -91,6 +91,24 @@ class IterativeLinkedList
     end
   end
 
+  def find_node(position)
+    current = @head
+    counter = 0
+    if position == 0
+      return current.name
+    elsif position == 1
+      return current.next_node.name
+    else
+      while current.next_node != nil
+        counter = counter + 1
+        current = current.next_node
+        if counter == position
+          return current.name
+        end
+      end
+    end
+  end
+
 end
 
 
@@ -131,7 +149,7 @@ class RecursiveLinkedList < IterativeLinkedList
     else      
       current = current.next_node
       if current.next_node != nil
-      #  last_node_data_recursive
+        last_node_data_recursive
       else
         return current.name
       end

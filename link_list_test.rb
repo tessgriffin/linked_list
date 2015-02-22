@@ -204,6 +204,23 @@ class LinkListTest < Minitest::Test
 
     list.pop_iteratively
     assert_equal 3, list.count_iterative
+  end
+
+  def test_it_can_access_a_node_by_numeric_position_iteratively
+    list = IterativeLinkedList.new
+    node1 = Node.new("Spock")
+    node2 = Node.new("Kirk")
+    node3 = Node.new("Sulu")
+    node4 = Node.new("Picard")    
+    list.add_node_to_bottom(node1)
+    list.add_node_to_bottom(node2)
+    list.add_node_to_bottom(node3)
+    list.add_node_to_bottom(node4)  
+
+    assert_equal "Spock", list.find_node(0)
+    assert_equal "Kirk", list.find_node(1)
+    assert_equal "Sulu", list.find_node(2)
+    assert_equal "Picard", list.find_node(3)
 
   end
 
